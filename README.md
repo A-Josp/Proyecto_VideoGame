@@ -4,4 +4,9 @@ Cree un objeto que sera el persoaje, ademas de agregar la libreria Pygame.
 
 23/7/2024
 
-crre una clase llamada bala que sera el proyectil con el que el objeto atacara
+cree una clase llamada bala que sera el proyectil con el que el objeto atacara
+
+24/7/2024
+
+agregue y edite el main donde todo el juego se ejecutara
+
