@@ -10,3 +10,6 @@ cree una clase llamada bala que sera el proyectil con el que el objeto atacara
 
 agregue y edite el main donde todo el juego se ejecutara
 
+25/7/2024
+
+Cree un objeto que sera el enemigo
