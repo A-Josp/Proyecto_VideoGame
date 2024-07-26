@@ -3,6 +3,7 @@ import sys
 from ajustes import Ajustes
 from coche import Coche
 from bala import bala
+from enemigo import Enemigo
 
 class DestructorCar:
     def __init__(self):
@@ -12,19 +13,44 @@ class DestructorCar:
         self.fondo = pygame.image.load(self.ajustes.fondo)
         pygame.display.set_caption("Coche Destructor")
         self.coche = Coche(self)
-        self.balas = pygame.sprite.Group()  # Corregido el error tipográfico
+        self.balas = pygame.sprite.Group()
+        self.enemigos = pygame.sprite.Group()
+        self.enviarEnemigos()
 
+        # Cargar sonidos
+        self.sonido_motor = pygame.mixer.Sound('sonidos/stranger.mp3')
+        self.sonido_disparo = pygame.mixer.Sound('sonidos/Murillo.wav')
+
+        # Reproducir sonido de motor en bucle
+        self.sonido_motor.play(-1)  # -1 para bucle infinito
+
+    def enviarEnemigos(self):
+        cocheMalvado = Enemigo(self)
+        self.enemigos.add(cocheMalvado)  
+    
+    def eliminarEnemigosViejos(self):
+        for enemigo in self.enemigos.copy():
+            if enemigo.rect.bottom >= self.ajustes.altura:
+                self.enemigos.remove(enemigo)
+                self.enviarEnemigos()
+
+    def actualizarEnemigos(self):
+        self.enemigos.update()
+       
     def actualizarPantalla(self):
         self.screen.blit(self.fondo, (0, 0))
         self.coche.blitme()
         for bala in self.balas.sprites():
-            bala.pintarBala()  # Corregido: debería ser 'bala', no 'bala' o 'self.bala'
+            bala.pintarBala()
+        self.enemigos.draw(self.screen)
         pygame.display.flip()
 
     def dispararBala(self):
-        if len(self.balas) < self.ajustes.balasPermitidas:
-            nuevaBala = bala(self)
-            self.balas.add(nuevaBala)  # Corregido: debería ser 'self.balas', no 'self.bala'   
+        nuevaBala = bala(self)
+        self.balas.add(nuevaBala)
+
+        # Reproducir sonido de disparo
+        self.sonido_disparo.play()
 
     def comprobarEventos(self):
         for event in pygame.event.get():
@@ -40,7 +66,7 @@ class DestructorCar:
                 elif event.key == pygame.K_DOWN:
                     self.coche.moviendoAbajo = True
                 elif event.key == pygame.K_SPACE:
-                    self.dispararBala()    
+                    self.dispararBala()
             elif event.type == pygame.KEYUP:
                 if event.key == pygame.K_RIGHT:
                     self.coche.moviendoDerecha = False
@@ -55,9 +81,12 @@ class DestructorCar:
         while True:
             self.comprobarEventos()
             self.coche.actualizar()
-            self.balas.update()  # Corregido: debería ser 'self.balas', no 'self.bala'
+            self.balas.update()
+            self.actualizarEnemigos()
+            self.eliminarEnemigosViejos()
             self.actualizarPantalla()
 
 if __name__ == "__main__":
     dc = DestructorCar()
     dc.run_game()
+

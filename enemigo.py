@@ -8,7 +8,7 @@ class Enemigo(Sprite):
         self.screen = dc_game.screen
 
         # Especifica la ruta correcta de la imagen aquí
-        self.image = pygame.image.load('imagenes/cocheR.png')
+        self.image = pygame.image.load('imagenes/zombie.gif')
         self.rect = self.image.get_rect()
 
         self.rect.y = self.rect.height - 50
