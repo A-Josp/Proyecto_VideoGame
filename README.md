@@ -25,3 +25,7 @@ Se actualizo el enemigo y se agrego su funcion a la clase principal, ademas de p
 30/7/2024 //Noche
 
 Solamente agregamos unos cambios necesario al archivo ajustes.py
+
+31/7/2024
+
+Creamos un nuevo objeto que sera el enemigo numero dos.
