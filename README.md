@@ -21,3 +21,7 @@ Se edito el objeto enemigo ahora se cambio a un sprite tipo gif que recorre hori
 30/7/2024
 
 Se actualizo el enemigo y se agrego su funcion a la clase principal, ademas de permitir a la imagen rotar cada que se mueve de manera que de la sensacion de girar cada que se mueve.
+
+30/7/2024 //Noche
+
+Solamente agregamos unos cambios necesario al archivo ajustes.py
