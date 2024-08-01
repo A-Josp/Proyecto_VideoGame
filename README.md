@@ -29,3 +29,7 @@ Solamente agregamos unos cambios necesario al archivo ajustes.py
 31/7/2024
 
 Creamos un nuevo objeto que sera el enemigo numero dos.
+
+1/8/2024
+
+seguimos editando la funcion del enemigo 2
