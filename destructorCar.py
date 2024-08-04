@@ -4,6 +4,7 @@ from ajustes import Ajustes
 from coche import Coche
 from bala import bala
 from enemigo import Enemigo
+from enemigo2 import Enemigo2
 
 class Menu:
     def __init__(self, dc_game):
@@ -47,7 +48,9 @@ class DestructorCar:
         self.coche = Coche(self)
         self.balas = pygame.sprite.Group()
         self.enemigos = pygame.sprite.Group()
+        self.enemigos2 = pygame.sprite.Group()
         self.enviarEnemigos()
+        self.enviarEnemigos2()
 
         # Inicializar el mezclador de sonido
         pygame.mixer.init()
@@ -63,8 +66,14 @@ class DestructorCar:
         self.menu = Menu(self)
 
     def enviarEnemigos(self):
-        cocheMalvado = Enemigo(self)
-        self.enemigos.add(cocheMalvado)
+        while len(self.enemigos) < 3:  # Ajusta este número según la cantidad deseada
+            cocheMalvado = Enemigo(self)
+            self.enemigos.add(cocheMalvado)
+
+    def enviarEnemigos2(self):
+        while len(self.enemigos2) < 2:  # Dos enemigos a la vez
+            enemigo2 = Enemigo2(self)
+            self.enemigos2.add(enemigo2)
 
     def eliminarEnemigosViejos(self):
         for enemigo in self.enemigos.copy():
@@ -72,15 +81,23 @@ class DestructorCar:
                 self.enemigos.remove(enemigo)
                 self.enviarEnemigos()
 
+    def eliminarEnemigos2Viejos(self):
+        for enemigo in self.enemigos2.copy():
+            if enemigo.rect.top > self.ajustes.altura or enemigo.rect.bottom < 0:
+                self.enemigos2.remove(enemigo)
+                self.enviarEnemigos2()
+
     def actualizarEnemigos(self):
         self.enemigos.update()
-       
+        self.enemigos2.update()
+
     def actualizarPantalla(self):
         self.screen.blit(self.fondo, (0, 0))
         self.coche.blitme()
         for bala in self.balas.sprites():
             bala.pintarBala()
         self.enemigos.draw(self.screen)
+        self.enemigos2.draw(self.screen)
         pygame.display.flip()
 
     def dispararBala(self):
@@ -123,6 +140,7 @@ class DestructorCar:
                 self.balas.update()
                 self.actualizarEnemigos()
                 self.eliminarEnemigosViejos()
+                self.eliminarEnemigos2Viejos()
                 self.actualizarPantalla()
             else:
                 self.menu.mostrar_menu()
@@ -131,3 +149,4 @@ class DestructorCar:
 if __name__ == "__main__":
     dc = DestructorCar()
     dc.run_game()
+
