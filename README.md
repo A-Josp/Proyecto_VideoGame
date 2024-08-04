@@ -33,3 +33,7 @@ Creamos un nuevo objeto que sera el enemigo numero dos.
 1/8/2024
 
 seguimos editando la funcion del enemigo 2
+
+3/8/2024
+
+terminamos la funcion del segundo enemigo y la integramos al archivo principal
