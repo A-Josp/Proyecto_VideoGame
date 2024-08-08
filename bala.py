@@ -5,7 +5,7 @@ import math
 class bala(Sprite):
     def __init__(self, dc_game):  # Cambiado de _init_ a __init__
         super().__init__()  # Cambiado de _init_ a __init__
-        self.screen = dc_game.screen  # Asignar dc_game.screen, no dc_game
+        self.screen = dc_game.screen  
         self.ajustes = dc_game.ajustes
         self.color = self.ajustes.colorBala
         
